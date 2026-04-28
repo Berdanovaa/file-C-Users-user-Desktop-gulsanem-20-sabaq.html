@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MySite Pro</title>
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:Arial;}
+
+html{scroll-behavior:smooth;}
+
+body{
+    overflow-x:hidden;
+    background: linear-gradient(135deg,#0f172a,#1e293b,#0b1220);
+    color:white;
+}
+
+/* HEADER */
+header{
+    position:fixed;
+    width:100%;
+    top:0;
+    left:0;
+    background:rgba(0,0,0,0.6);
+    backdrop-filter:blur(10px);
+    color:white;
+    padding:15px 30px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    z-index:1000;
+}
+
+nav{
+    display:flex;
+    gap:15px;
+}
+
+nav a{
+    color:white;
+    text-decoration:none;
+    transition:0.3s;
+}
+
+nav a:hover,nav a.active{
+    color:#00c6ff;
+}
+
+/* MOBILE */
+#menuBtn{
+    display:none;
+    font-size:24px;
+    background:none;
+    border:none;
+    color:white;
+}
+
+/* HOME */
+.home{
+    height:100vh;
+    background:url('https://images.unsplash.com/photo-1521737604893-d14cc237f11d') center/cover no-repeat;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+    position:relative;
+}
+
+.home::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:rgba(0,0,0,0.65);
+}
+
+.home *{
+    position:relative;
+    z-index:2;
+}
+
+.typing{
+    font-size:40px;
+    border-right:3px solid white;
+    white-space:nowrap;
+}
+
+/* BUTTON */
+.btn{
+    margin-top:20px;
+    padding:12px 25px;
+    background:linear-gradient(135deg,#0d6efd,#00c6ff);
+    border:none;
+    color:white;
+    border-radius:10px;
+    cursor:pointer;
+    transition:0.3s;
+}
+
+.btn:hover{
+    transform:scale(1.08);
+    box-shadow:0 0 20px #00c6ff;
+}
+
+/* SECTIONS */
+section{
+    margin:20px;
+    padding:90px 20px;
+    border-radius:20px;
+    background:rgba(255,255,255,0.06);
+    border:1px solid rgba(255,255,255,0.12);
+    backdrop-filter:blur(10px);
+    text-align:center;
+}
+
+/* GRID */
+.grid{
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:center;
+    gap:20px;
+}
+
+/* CARD */
+.card{
+    width:260px;
+    padding:20px;
+    border-radius:15px;
+    background:rgba(255,255,255,0.08);
+    border:1px solid rgba(255,255,255,0.15);
+    backdrop-filter:blur(10px);
+    transition:0.4s;
+}
+
+.card:hover{
+    transform:translateY(-10px) scale(1.05);
+    border:1px solid #00c6ff;
+    box-shadow:0 10px 25px rgba(0,198,255,0.3);
+}
+
+.card img{
+    width:100%;
+    border-radius:10px;
+}
+
+/* COUNTER */
+.counter{
+    font-size:40px;
+    color:#00c6ff;
+    font-weight:bold;
+}
+
+/* HIDDEN ANIMATION */
+.hidden{
+    opacity:0;
+    transform:translateY(50px);
+    transition:1s;
+}
+
+.show{
+    opacity:1;
+    transform:translateY(0);
+}
+
+/* CONTACT */
+input,textarea{
+    width:80%;
+    padding:10px;
+    margin:10px 0;
+    border-radius:8px;
+    border:none;
+    outline:none;
+}
+
+/* FOOTER */
+footer{
+    text-align:center;
+    padding:30px;
+    background:black;
+}
+
+/* MOBILE */
+@media(max-width:768px){
+
+    nav{
+        position:absolute;
+        top:60px;
+        left:0;
+        width:100%;
+        flex-direction:column;
+        background:black;
+        display:none;
+    }
+
+    nav.show{
+        display:flex;
+    }
+
+    #menuBtn{
+        display:block;
+    }
+
+    .typing{
+        font-size:26px;
+    }
+
+    .grid{
+        flex-direction:column;
+        align-items:center;
+    }
+
+    input,textarea{
+        width:95%;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <h2>MySite</h2>
+    <button id="menuBtn">☰</button>
+    <nav>
+        <a href="#home">Home</a>
+        <a href="#intro">Intro</a>
+        <a href="#stats">Stats</a>
+        <a href="#portfolio">Portfolio</a>
+        <a href="#contact">Contact</a>
+    </nav>
+</header>
+
+<section id="home" class="home">
+    <h1 class="typing" id="typing"></h1>
+    <p>Zamonaviy IT xizmatlar</p>
+    <button class="btn">Boshlash</button>
+</section>
+
+<section id="intro" class="hidden">
+    <h1>Biz haqimizda</h1>
+    <p>Professional web saytlar va IT yechimlar yaratamiz.</p>
+</section>
+
+<section id="stats" class="hidden">
+    <h1>Natijalar</h1>
+    <div class="grid">
+        <div>
+            <div class="counter" data-target="150">0</div>
+            <p>Mijozlar</p>
+        </div>
+        <div>
+            <div class="counter" data-target="300">0</div>
+            <p>Loyihalar</p>
+        </div>
+        <div>
+            <div class="counter" data-target="5">0</div>
+            <p>Yil tajriba</p>
+        </div>
+    </div>
+</section>
+
+<section id="portfolio" class="hidden">
+    <h1>Portfolio</h1>
+    <div class="grid">
+        <div class="card"><img src="https://picsum.photos/300"><p>Project 1</p></div>
+        <div class="card"><img src="https://picsum.photos/301"><p>Project 2</p></div>
+        <div class="card"><img src="https://picsum.photos/302"><p>Project 3</p></div>
+    </div>
+</section>
+
+<section id="contact" class="hidden">
+    <h1>Aloqa</h1>
+    <input placeholder="Ism">
+    <input placeholder="Email">
+    <textarea placeholder="Xabar"></textarea>
+    <button class="btn">Yuborish</button>
+</section>
+
+<footer>
+
+<h2>Follow Us</h2> <div> <a href="https://facebook.com" class="icon facebook">F</a> <a href="https://instagram.com" class="icon instagram">I</a> <a href="https://telegram.com" class="icon telegram">T</a> <a href="https://youtube.com" class="icon youtube">Y</a> </div>
+ © 2026 MySite Pro
+</footer>
+
+<script>
+
+// MENU
+menuBtn.onclick=()=>{
+    document.querySelector("nav").classList.toggle("show");
+};
+
+// TYPING
+const texts=["Biz bilan kelajakni yarating","Professional IT xizmatlar"];
+let i=0,j=0;
+(function type(){
+    let t=texts[i];
+    document.getElementById("typing").textContent=t.slice(0,++j);
+    if(j==t.length){
+        i=(i+1)%texts.length;
+        j=0;
+        setTimeout(type,1500);
+    }else setTimeout(type,50);
+})();
+
+// COUNTER
+document.querySelectorAll(".counter").forEach(c=>{
+    let update=()=>{
+        let target=+c.dataset.target;
+        let count=+c.innerText;
+        if(count<target){
+            c.innerText=count+Math.ceil(target/50);
+            setTimeout(update,40);
+        }else c.innerText=target;
+    };
+    update();
+});
+
+// SCROLL ANIMATION
+const obs=new IntersectionObserver(e=>{
+    e.forEach(x=>{
+        if(x.isIntersecting)x.target.classList.add("show");
+    });
+});
+document.querySelectorAll(".hidden").forEach(el=>obs.observe(el));
+
+</script>
+
+</body>
+</html>

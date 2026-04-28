@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Flip Reset Login</title>
+
+<style>
+body {
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    font-family: Arial;
+}
+
+.container {
+    perspective: 1200px;
+}
+
+.card {
+    width: 320px;
+    padding: 40px;
+    background: white;
+    border-radius: 20px;
+    text-align: center;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+    transition: transform 0.9s;
+    transform-style: preserve-3d;
+}
+
+/* flip */
+.flipped {
+    transform: rotateY(180deg);
+}
+
+input {
+    width: 100%;
+    padding: 12px;
+    margin: 10px 0;
+    border: 2px solid #eee;
+    border-radius: 10px;
+    outline: none;
+}
+
+button {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    background: #764ba2;
+    color: white;
+    border-radius: 10px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+button:hover {
+    background: #5a377d;
+}
+
+a {
+    display: block;
+    margin-top: 10px;
+    font-size: 13px;
+    color: #667eea;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+/* shake (error) */
+.shake {
+    animation: shake 0.4s linear;
+}
+
+@keyframes shake {
+    0% { transform: translateX(0); }
+    25% { transform: translateX(-5px); }
+    50% { transform: translateX(5px); }
+    75% { transform: translateX(-5px); }
+    100% { transform: translateX(0); }
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+    <div class="card" id="card">
+
+        <input id="login" type="text" placeholder="login (faqat harf)">
+        <input id="password" type="text" placeholder="parol (faqat son)">
+
+        <a onclick="forgot()">Parol unutildimi?</a>
+
+        <button onclick="send()">Send</button>
+
+    </div>
+</div>
+
+<script>
+
+// faqat harf
+document.getElementById("login").addEventListener("input", function () {
+    this.value = this.value.replace(/[^a-zA-Z]/g, '');
+});
+
+// faqat son
+document.getElementById("password").addEventListener("input", function () {
+    this.value = this.value.replace(/[^0-9]/g, '');
+});
+
+function animateFlip(callback) {
+    const card = document.getElementById("card");
+
+    card.classList.add("flipped");
+
+    setTimeout(() => {
+        card.classList.remove("flipped");
+        callback();
+    }, 900);
+}
+
+// SEND bosilganda
+function send() {
+    const login = document.getElementById("login");
+    const pass = document.getElementById("password");
+
+    if (login.value !== "" && pass.value !== "") {
+
+        animateFlip(() => {
+            login.value = "";
+            pass.value = "";
+        });
+
+    } else {
+        shake();
+    }
+}
+
+// FORGOT password bosilganda
+function forgot() {
+    const login = document.getElementById("login");
+    const pass = document.getElementById("password");
+
+    animateFlip(() => {
+        login.value = "";
+        pass.value = "";
+    });
+}
+
+// error animatsiya
+function shake() {
+    const card = document.getElementById("card");
+
+    card.classList.add("shake");
+
+    setTimeout(() => {
+        card.classList.remove("shake");
+    }, 400);
+}
+
+</script>
+
+</body>
+</html>
